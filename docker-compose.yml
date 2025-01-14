@@ -8,3 +8,24 @@ services:
       - ./notebook/app:/app
     env_file:
       - .env
+    # networks:
+    #   - default
+  pgvector:
+    image: phidata/pgvector:16
+    container_name: pgvector
+    environment:
+      POSTGRES_DB: ai
+      POSTGRES_USER: ai
+      POSTGRES_PASSWORD: ai
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - pgvolume:/var/lib/postgresql/data
+    ports:
+      - "5532:5432"
+    # networks:
+    #   - default
+volumes:
+  pgvolume:
+    # networks:
+    #   default:
+    #     driver: bridge
